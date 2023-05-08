@@ -24,6 +24,7 @@ module.exports = {
 };
 */
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
 
 // Define a counter variable
 let commandCounter = 0;
