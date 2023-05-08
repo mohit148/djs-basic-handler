@@ -1,11 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('rank')
     .setDescription('shows users rank card!'),
   async execute(interaction) {
-    const name = interaction.user.tag;
+    let name = interaction.user.tag;
     if (name.length > 10) {
       name = name.substring(0, 11) + "...";
     }
@@ -17,6 +18,7 @@ module.exports = {
       .setThumbnail(interaction.user.displayAvatarURL({dynamic: true}));
 
     await interaction.reply({ embeds: [embed] });
+    await wait(2000);
     await interaction.followUp({content: ':bulb: **Did you know?** \n You can check the reward list for level roles using </rewards:28040282029>', ephemeral: true});
   },
 };
